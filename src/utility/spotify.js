@@ -1,5 +1,6 @@
 const SpotifyWebApi = require("spotify-web-api-node");
 
+// Working on understanding the auth process. Will need to implement some sort of webserver, probably.
 const client = new SpotifyWebApi({
   clientId: process.env.SPOTIFY_ID,
   clientSecret: process.env.SPOTIFY_SECRET,
@@ -69,23 +70,10 @@ async function clearPlaylist(playlist) {
   return res;
 }
 
-function parseUri(inputUri) {
-  const pattern = /.*spotify(?:.com|)(:|\/)([a-z]+)\1([a-zA-Z0-9]+).*/;
-  const id = inputUri.replace(pattern, "$3");
-  const type = inputUri.replace(pattern, "$2");
-  return {
-    id: id,
-    type: type,
-    uri: `spotify:${type}:${id}`,
-    webUri: `https://www.spotify.com/${type}/${id}`,
-  };
-}
-
 module.exports = {
   connect: connect,
   getAllPlaylistTracks: getAllPlaylistTracks,
   clearPlaylist: clearPlaylist,
-  parseUri: parseUri,
   client: client,
   Target: Target,
 };

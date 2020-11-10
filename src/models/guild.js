@@ -1,3 +1,5 @@
+// Todo: rework into a class.
+
 function create(guild) {
   db.collection("Guilds")
     .insertOne({
